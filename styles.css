@@ -382,7 +382,7 @@ body {
     display: block;
 }
 
-/*Itinerario*/
+/* --- ITINERARIO --- */
 .itinerary-section {
     margin: 40px 0;
     position: relative;
@@ -397,31 +397,40 @@ body {
     text-align: center;
 }
 
-.time-line {
+/* Contenedor principal de la línea de tiempo */
+.timeline {
     position: relative;
     max-width: 300px;
     margin: 0 auto;
 }
 
-/*Linea vertical dorada central*/
-.time-line::before {
-    content: ´´;
+/* Trazado de la Línea Vertical Dorado Central */
+.timeline::before {
+    content: '';
     position: absolute;
     top: 10px;
     bottom: 10px;
     left: 50%;
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: top;
     width: 2px;
-    background-color: var(--gold-accent);
-    transform: translateY(-50%);
-    opacity: 0.6;
+    background: linear-gradient(to bottom, transparent, var(--gold-accent) 15%, var(--gold-accent) 85%, transparent);
+    z-index: 1;
+    transition: transform 1.2s ease-in-out;
 }
 
+.timeline.visible::before {
+    transform: translateX(-50%) scaleY(1);
+}
+
+/* Ítem individual de la línea de tiempo */
 .timeline-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
     position: relative;
+    z-index: 2; /* Para quedar por encima de la línea */
 }
 
 .timeline-time {
@@ -433,26 +442,14 @@ body {
     padding-right: 15px;
 }
 
-/*---Trazado de la linea vertical---*/
-.itinerary-section ::before {
-    content: ´´;
-    position: absolute;
-    top: 80px;
-    bottom: 20px;
-    left: 50%;
-    width: 2px;
-    background: linear-gradient(to bottom, transparent, var(--gold-accent), transparent);
-    z-index: 1;
-}
-
-/*Punto indicador en la linea*/
+/* Punto indicador sobre la línea */
 .timeline-dot {
     width: 10px;
     height: 10px;
     background-color: var(--gold-accent);
     border-radius: 50%;
-    z-index: 2;
-    box-shadow: 0 0 0 3px var(--bg-papper);
+    z-index: 3;
+    box-shadow: 0 0 0 3px var(--bg-paper); /* Corregido: una sola 'p' */
 }
 
 .timeline-content {
@@ -565,7 +562,7 @@ body {
 }
 
 .location-title, .itinerary-title, .event-heading span {
-    text-shadow: 0px 1px 2px rgba(184, 155, 94, 0.2);
+    text-shadow: 0px 1px 2px rgba(184, 155, 94, 0.6);
 }
 
 .middle-photo, .footer-photo {

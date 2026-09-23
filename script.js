@@ -97,4 +97,17 @@ setInterval(updateCountdown, 1000);
         mirror: true    // Anima los elementos mientraste desplazas hacia arriba tambien
     });
 
-    
+//Animacion de la linea del tiempo(Itinerario)
+    const timeline = document.querySelector('.timeline');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.2 });
+
+if (timeline) {
+    observer.observe(timeline);
+}  
